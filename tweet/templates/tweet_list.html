@@ -31,11 +31,16 @@ TweetX - Tweet List 😎
           <p class="card-text">{{ tweet.text }}</p>
         </div>
 
+        
+
         <div class="card-footer bg-dark border-top-0 d-flex justify-content-between">
+          {% if tweet.user == user %}
           <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-sm btn-outline-warning">✏️ Edit</a>
           <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-sm btn-outline-danger delete-btn">🗑️ Delete</a>
+          {% endif %}  
         </div>
-      </div>
+      </div> 
+                       
     </div>
     {% endfor %}
   </div>
