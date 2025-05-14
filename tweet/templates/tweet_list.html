@@ -1,31 +1,63 @@
 {% extends "layout.html" %}
 
-
 {% block title %}
-TweetX - Tweet List 😂
+TweetX - Tweet List 😎
 {% endblock %}
 
 {% block content %}
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-light fw-bold">🔥 Tweet Feed</h2>
+    <a class="btn btn-success shadow" href="{% url 'tweet_create' %}">➕ New Tweet</a>
+  </div>
 
-<a class="btn btn-primary" href="{% url "tweet_create" %}">Create new Tweet 😦</a>
-
-<div class="container row gap-3">
+  <div class="row g-4">
     {% for tweet in tweets %}
-    <div class="card" style="width: 18rem;">
-        <img src="{{tweet.photo.url}}" class="card-img-top" alt="...">
+    <div class="col-md-4">
+      <div class="card bg-dark text-white border-0 shadow-lg tweet-card h-100">
+        {% if tweet.photo %}
+        <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet Image" style="object-fit: cover; height: 200px;" />
+        {% else %}
+        <div class="bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+          <span class="text-white-50">No Image</span>
+        </div>
+        {% endif %}
+
         <div class="card-body">
-         <p class="text-left">{{tweet.user.username}}</p>
-          <p class="card-text">{{tweet.text}}</p>
+          <h6 class="text-success">@{{ tweet.user.username }}</h6>
+          <p class="card-text">{{ tweet.text }}</p>
+        </div>
 
-          <a href="{% url "tweet_edit" tweet.id %}" class="btn btn-primaray">Edit</a>
-
-          <a href="{% url "tweet_delete" tweet.id %}" class="btn btn-danger">Delete</a>
+        <div class="card-footer bg-dark border-top-0 d-flex justify-content-between">
+          <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-sm btn-outline-warning">✏️ Edit</a>
+          <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-sm btn-outline-danger">🗑️ Delete</a>
         </div>
       </div>
+    </div>
     {% endfor %}
-
+  </div>
 </div>
 
+<style>
+  body {
+    background-color: #121212;
+  }
 
-    {% endblock %}
+  .tweet-card:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    border: 1px solid #1f1f1f;
+    background-color: #1c1c1c;
+  }
 
+  .btn-outline-warning:hover {
+    background-color: #ffc107;
+    color: #000;
+  }
+
+  .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+  }
+</style>
+{% endblock %}
