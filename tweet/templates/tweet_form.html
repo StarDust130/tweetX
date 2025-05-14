@@ -1,20 +1,41 @@
 {% extends "layout.html" %}
 
-
 {% block title %}
-TweetX - Home Tweet Page 😁
+    Edit Tweet - TweetX ✏️
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>Welcome to TweetX 🤣</h1>
-    <p>Your one-stop solution for all things Twitter!</p>
-    <p>Explore the latest tweets, trends, and more.</p>
-    <p>Stay connected and share your thoughts with the world.</p>
-    <p>Check out the latest tweets below:</p>
+<div class="container my-5">
+    <h2 class="text-center mb-4">Edit Your Tweet</h2>
     
+    <!-- Form Card -->
+    <div class="card shadow-lg p-4">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Tweet Text Field -->
+            <div class="form-group mb-3">
+                <label for="id_text" class="form-label">Tweet Text</label>
+                <textarea name="text" class="form-control" id="id_text" rows="5" placeholder="Write something...">{{ form.text.value }}</textarea>
+            </div>
+            
+            <!-- Tweet Photo Field -->
+            <div class="form-group mb-3">
+                <label for="id_photo" class="form-label">Tweet Photo</label>
+                <div class="mb-2">
+                    {% if form.photo.value %}
+                        <img src="{{ form.photo.value.url }}" class="img-fluid rounded mb-3" style="max-height: 200px; object-fit: cover;" alt="Current Tweet Image">
+                    {% endif %}
+                </div>
+                {{ form.photo }}  <!-- This will show the file input -->
+            </div>
+            
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">Save Changes</button>
+                <a href="{% url 'tweet_list' %}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
     </div>
-
-
-    {% endblock %}
-
+</div>
+{% endblock %}
