@@ -16,8 +16,9 @@ def hello(request):
 
 #! Tweet List 🚵
 def tweet_list(request):
-    tweets = Tweet.objects.all().order("-created_at")
+    tweets = Tweet.objects.all().order_by("-created_at")
     return render(request, "tweet_list.html", {"tweets": tweets})
+
 
 #! Tweet Create 🍨
 def tweet_create(request):
