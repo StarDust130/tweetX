@@ -19,7 +19,7 @@ def tweet_list(request):
     tweets = Tweet.objects.all().order("-created_at")
     return render(request, "tweet_list.html", {"tweets": tweets})
 
-# Tweet Create 🍨
+#! Tweet Create 🍨
 def tweet_create(request):
     if request.method == "POST":
       form = TweetForm(request.POST , request.FILES)
@@ -28,7 +28,6 @@ def tweet_create(request):
         tweet.user = request.user
         tweet.save()
         return redirect("tweet_list")
-          
           
       pass
     else:
