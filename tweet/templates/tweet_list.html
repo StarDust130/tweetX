@@ -1,12 +1,31 @@
+{% extends "layout.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+
+{% block title %}
+TweetX - Tweet List 😂
+{% endblock %}
+
+{% block content %}
+
+<a class="btn btn-primary" href="{% url "tweet_create" %}">Create new Tweet 😦</a>
+
+<div class="container row gap-3">
+    {% for tweet in tweets %}
+    <div class="card" style="width: 18rem;">
+        <img src="{{tweet.photo.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+         <p class="text-left">{{tweet.user.username}}</p>
+          <p class="card-text">{{tweet.text}}</p>
+
+          <a href="{% url "tweet_edit" tweet.id %}" class="btn btn-primaray">Edit</a>
+
+          <a href="{% url "tweet_delete" tweet.id %}" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+    {% endfor %}
+
+</div>
+
+
+    {% endblock %}
+
