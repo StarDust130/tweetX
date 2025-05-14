@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Login - TweetX 🚪
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card bg-dark text-white shadow-lg p-4" style="width: 100%; max-width: 400px;">
+    <h3 class="text-center text-light mb-4">🔐 Login to TweetX</h3>
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="id_username" class="form-label">Username</label>
+        <input type="text" name="username" class="form-control bg-secondary text-white" id="id_username" required>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-4">
+        <label for="id_password" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control bg-secondary text-white" id="id_password" required>
+      </div>
+
+      <!-- Submit -->
+      <div class="d-grid">
+        <button type="submit" class="btn btn-success">Login</button>
+      </div>
+    </form>
+
+    <div class="mt-3 text-center">
+      <small>Don't have an account? <a href="{% url 'register' %}" class="text-info">Register here</a></small>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    background-color: #121212;
+  }
+
+  input::placeholder {
+    color: #ccc;
+  }
+
+  .form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+  }
+</style>
+{% endblock %}
