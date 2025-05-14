@@ -1,41 +1,62 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Edit Tweet - TweetX ✏️
+    {% if form.instance.pk %}
+        Edit Tweet - TweetX ✏️
+    {% else %}
+        Create Tweet - TweetX 🐣
+    {% endif %}
 {% endblock %}
 
 {% block content %}
 <div class="container my-5">
-    <h2 class="text-center mb-4">Edit Your Tweet</h2>
-    
-    <!-- Form Card -->
+    <h2 class="text-center mb-4">
+        {% if form.instance.pk %}
+            Edit Your Tweet
+        {% else %}
+            Create a New Tweet
+        {% endif %}
+    </h2>
+
     <div class="card shadow-lg p-4">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            
-            <!-- Tweet Text Field -->
+
+            <!-- Tweet Text -->
             <div class="form-group mb-3">
                 <label for="id_text" class="form-label">Tweet Text</label>
-                <textarea name="text" class="form-control" id="id_text" rows="5" placeholder="Write something...">{{ form.text.value }}</textarea>
+                <textarea name="text" class="form-control" id="id_text" rows="5" placeholder="Write something...">
+                    {{ form.text.value|default:"" }}
+                </textarea>
+                
             </div>
-            
-            <!-- Tweet Photo Field -->
+
+            <!-- Tweet Photo -->
             <div class="form-group mb-3">
                 <label for="id_photo" class="form-label">Tweet Photo</label>
                 <div class="mb-2">
                     {% if form.photo.value %}
-                        <img src="{{ form.photo.value.url }}" class="img-fluid rounded mb-3" style="max-height: 200px; object-fit: cover;" alt="Current Tweet Image">
+                        <img src="{{ form.photo.value.url }}" class="img-fluid rounded mb-3" style="max-height: 200px;" alt="Tweet Image">
                     {% endif %}
                 </div>
-                {{ form.photo }}  <!-- This will show the file input -->
+                {{ form.photo }}
             </div>
-            
+
             <!-- Buttons -->
             <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-success">Save Changes</button>
-                <a href="{% url 'tweet_list' %}" class="btn btn-outline-secondary">Cancel</a>
+                <a href="{% url 'tweet_list' %}" class="btn btn-outline-secondary text-white">Cancel</a>
+                
+                <button type="submit" class="btn btn-{% if form.instance.pk %}success{% else %}primary{% endif %}">
+                    {% if form.instance.pk %}
+                        Save Changes
+                    {% else %}
+                        Post Tweet
+                    {% endif %}
+                </button>
+                
             </div>
         </form>
     </div>
 </div>
 {% endblock %}
+
