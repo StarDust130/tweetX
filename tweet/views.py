@@ -60,8 +60,6 @@ def tweet_edit(request , tweet_id):
    return render(request, "tweet_form.html", {"form": form})
 
 #! Tweet Delete 🙃
-
-
 @login_required
 def tweet_delete(request , tweet_id):
    tweet = get_object_or_404(Tweet , pk=tweet_id , user = request.user)
@@ -71,3 +69,10 @@ def tweet_delete(request , tweet_id):
       return redirect("tweet_list")
    
    return render(request, "tweet_confrim_delete.html", {"tweet": tweet})
+
+
+#! Register 🤭
+def register(request):
+   
+   
+   
