@@ -29,12 +29,12 @@
         <ul class="navbar-nav align-items-center gap-2">
           {% if request.user.is_authenticated %}
             <li class="nav-item">
-              <a class="btn btn-outline-info" href="{% url 'tweet_list' %}">🏠 Home</a>
+              <a class="btn btn-info" href="{% url 'tweet_list' %}">🏠 Home</a>
             </li>
             <li class="nav-item">
               <form method="POST" action="{% url 'logout' %}" class="d-inline">
                 {% csrf_token %}
-                <button class="btn btn-outline-danger" type="submit">Logout</button>
+                <button class="btn btn-danger" type="submit">Logout</button>
               </form>
             </li>
           {% else %}
