@@ -25,6 +25,7 @@ urlpatterns = [
     path('', lambda request: redirect('tweet/')),
     path("admin/", admin.site.urls),
     path("tweet/", include("tweet.urls")),
+    path("goti_moti/", include("goti_moti.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
 
     
